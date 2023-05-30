@@ -126,3 +126,18 @@
 .resetButton:active {
   transform: translateY(2px); /* Mueve el botón hacia abajo cuando se presiona */
 }
+
+@media (max-width: 768px){
+  .timeRemaining {
+    font-size: 250px;
+  }
+
+  .resetButton {
+    margin-top: 10px;
+    background-color: #d1411d;
+  }
+
+  .container{
+    margin-top:0px
+  }
+}
