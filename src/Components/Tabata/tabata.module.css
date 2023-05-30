@@ -1,0 +1,128 @@
+.container {
+  display:block;
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 50px;
+    margin-top: 10px;
+    width: 100%;
+
+  }
+  
+  .container.ejercicio {
+    background-color: #67e76d; /* Verde pastel */
+  }
+  
+  .container.descanso {
+    background-color: #ee7474; /* Rojo pastel */
+  }
+  
+  .container.descanso-entre-bloques {
+    background-color: #ebe344; /* Amarillo pastel */
+  }
+  .title {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .intervalContainer {
+    margin-bottom: 30px;
+  }
+  
+  .intervalTitle {
+    font-size: 48px;
+    color: #333;
+  }
+  
+  .timeRemaining {
+    font-size: 400px;
+    color: #333;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  
+  .totalTimeContainer {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .totalTimeTitle {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .totalTime {
+    font-size: 24px;
+    color: #555;
+  }
+  
+  .buttonsContainer {
+    margin-bottom: 30px;
+  }
+  
+  .startButton {
+    padding: 10px 40px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #1d86d1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .pauseButton {
+    padding: 10px 40px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #1d86d1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .resetButton {
+    padding: 10px 40px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #1d86d1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .settingsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .settingsContainer div {
+    margin-bottom: 10px;
+  }
+  
+  .settingsContainer h4 {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .settingsContainer input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .startButton:hover,
+.pauseButton:hover,
+.resetButton:hover {
+  background-color: #1581c2; /* Cambia el color de fondo cuando se realiza el hover */
+}
+
+.startButton:active,
+.pauseButton:active,
+.resetButton:active {
+  transform: translateY(2px); /* Mueve el botón hacia abajo cuando se presiona */
+}
