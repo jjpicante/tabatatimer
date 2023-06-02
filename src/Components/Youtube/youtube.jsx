@@ -1,48 +1,37 @@
-import React, { useState } from "react";
-import style from "./youtube.module.css"
+import React, { useState, useEffect, useRef } from "react";
+import style from "./youtube.module.css";
 
 const Youtube = () => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [videoList, setVideoList] = useState([]);
+  const videoRef = useRef(null);
 
   const handleYoutubeUrlChange = (e) => {
     setYoutubeUrl(e.target.value);
   };
 
-  const transformarURL = (url) => {
-    const fragmentoReemplazado = "/watch?v=";
-    const fragmentoNuevo = "/embed/";
+  function transformarURL(link) {
+    var id;
+    var regex1 = /(?:\?v=|\/embed\/|\.be\/|\/v\/|\/vi\/|\/user\/\S+\/\S+\/|\/e\/|\/embed\/|\/v\/|\/watch\?v=|&v=|youtu\.be\/|\/\d{4}\/\d{1,2}\/\S+)([^#\&\?\n<>\"]+)/;
+    var regex2 = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?\n<>\"]+).*/;
 
-    const indiceReemplazo = url.indexOf(fragmentoReemplazado);
-    if (indiceReemplazo === -1) {
-      // El fragmento a reemplazar no se encuentra en la URL
-      return url;
+    if (regex1.test(link)) {
+      id = link.match(regex1)[1];
+    } else if (regex2.test(link)) {
+      id = link.match(regex2)[7];
     }
 
-    var nuevaURL = url.replace(fragmentoReemplazado, fragmentoNuevo);
-
-    // Eliminar cualquier contenido adicional después de los 11 caracteres siguientes a "/embed/"
-    const indiceAmpersand = nuevaURL.indexOf("&");
-    if (indiceAmpersand !== -1) {
-      nuevaURL = nuevaURL.substring(0, indiceAmpersand);
+    if (id) {
+      return "https://www.youtube.com/embed/" + id.substring(0, 11);
+    } else {
+      return null;
     }
-
-    return nuevaURL;
-  };
+  }
 
   const handleClick = () => {
     const video = {
       url: youtubeUrl,
-      embedCode: (
-        <iframe
-          title="Musica para entrenar"
-          width="580"
-          height="300"
-          src={transformarURL(youtubeUrl)}
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      )
+      embedCode: transformarURL(youtubeUrl),
     };
     setVideoList([...videoList, video]);
     setYoutubeUrl("");
@@ -62,14 +51,26 @@ const Youtube = () => {
         value={youtubeUrl}
         onChange={handleYoutubeUrlChange}
         placeholder="Ingrese la URL del video de YouTube"
-        className={style.inputStyle} // Agrega la clase CSS al input
+        className={style.inputStyle}
       />
-      <button onClick={handleClick} className={style.buttonStyle}>Agregar video</button>
+      <button onClick={handleClick} className={style.buttonStyle}>
+        Agregar video
+      </button>
       <div>
         {videoList.map((video, index) => (
-          <div key={index}>
-            {video.embedCode}
-            <button onClick={() => handleDelete(index)}>X</button>
+          <div key={index} className={style.videoContainer}>
+            <iframe
+              title="Musica para entrenar"
+              width="580"
+              height="300"
+              src={video.embedCode}
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              ref={index === 0 ? videoRef : null}
+            ></iframe>
+            <button onClick={() => handleDelete(index)} className={style.deleteButton}>
+              X
+            </button>
           </div>
         ))}
       </div>

@@ -1,31 +1,52 @@
 .buttonStyle {
-    background-color: #1d86d1;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .inputStyle {
-    padding: 10px;
-    border: 1px solid #1d86d1;
-    border-radius: 10px;
-    margin-bottom: 10px;
+  background-color: #1d86d1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.inputStyle {
+  padding: 10px;
+  border: 1px solid #1d86d1;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.videoContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.deleteButton {
+  color: rgb(33, 30, 30);
+  border: rgb(33, 30, 30) solid 2px;
+  border-radius: 50%;
+  height: 1.6rem;
+  width: 1.6rem;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+iframe{
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
   }
 
-  @media (max-width: 768px){
-    .container{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      align-items: center;
-    }
-
-    iframe{
-      margin-top: 10px;
-      width: 100%;
-      border-radius: 20px;
-    }
+  iframe {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 20px;
   }
-  
+}

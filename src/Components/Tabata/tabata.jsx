@@ -106,7 +106,7 @@ const Tabata = () => {
             setCurrentBlock((prevBlock) => prevBlock + 1);
             setCurrentRound(1);
             inicioDescansoLargoAudio.play();
-            setCurrentInterval("descanso entre bloques");
+            setCurrentInterval("descansoEntreBloques");
             setTimeRemaining(blockRestTime);
           } else {
             clearInterval(timer);
@@ -117,7 +117,7 @@ const Tabata = () => {
         }
       } else if (
         currentInterval === "descanso" ||
-        currentInterval === "descanso entre bloques"
+        currentInterval === "descansoEntreBloques"
       ) {
         inicioEjercicioAudio.play();
         setCurrentInterval("ejercicio");
@@ -137,6 +137,8 @@ const Tabata = () => {
     blockRestTime,
     timer,
   ]);
+
+  console.log(currentInterval);
 
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
