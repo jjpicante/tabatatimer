@@ -6,6 +6,7 @@ import inicioDescansoLargoSound from "./inicio desansolargo.mp3";
 import aplausosSound from "./aplausos.mp3";
 import style from "./tabata.module.css";
 import Ejercicios from "../Ejercicios/ejercicios";
+import { ProgressBar } from "react-bootstrap";
 
 const Tabata = () => {
   const [preparationTime, setPreparationTime] = useState(5);
@@ -135,25 +136,46 @@ const Tabata = () => {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
-    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
   };
 
   const handleAddExercises = (exercises) => {
     setRoundsPerBlock(exercises.length);
   };
 
+  const calculateTotalProgress = () => {
+    const totalDuration =
+      preparationTime * 1000 +
+      (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
+      blockRestTime * (totalBlocks - 1) * 1000;
+
+    const elapsedTime = totalDuration - totalTimeRemaining * 1000;
+
+    return (elapsedTime / totalDuration) * 100;
+  };
+
   return (
-    <div className={`${style.container} ${style[currentInterval.toLowerCase()]}`}>
+    <div
+      className={`${style.container} ${style[currentInterval.toLowerCase()]}`}
+    >
       <div className={style.intervalContainer}>
         <h2 className={style.intervalTitle}>
           {currentInterval === "FIN"
             ? "FIN"
-            : `Bloque ${currentBlock} / Ejercicio ${currentRound}`}
+            : `Bloque ${currentBlock}/${totalBlocks} - Ejercicio ${currentRound}/${roundsPerBlock}`}
         </h2>
         {timeRemaining !== null && (
           <h3 className={style.timeRemaining}>{timeRemaining}</h3>
         )}
       </div>
+          <div className={style.progressBarContainer}>
+            <div
+              className={style.progressBarFill}
+              style={{ width: `${calculateTotalProgress()}%` }}
+            ></div>
+          </div>
       <div className={style.totalTimeContainer}>
         <h4 className={style.totalTimeTitle}>Tiempo total:</h4>
         {totalTimeRemaining !== null && (
@@ -231,7 +253,10 @@ const Tabata = () => {
         />
       </div>
       <div className={style.settingsContainer}>
-        <Ejercicios handleAddExercises={handleAddExercises} currentRound={currentRound}  />
+        <Ejercicios
+          handleAddExercises={handleAddExercises}
+          currentRound={currentRound}
+        />
       </div>
     </div>
   );
