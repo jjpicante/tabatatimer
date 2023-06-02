@@ -6,15 +6,16 @@ import inicioDescansoLargoSound from "./inicio desansolargo.mp3";
 import aplausosSound from "./aplausos.mp3";
 import style from "./tabata.module.css";
 import Ejercicios from "../Ejercicios/ejercicios";
-import { ProgressBar } from "react-bootstrap";
 
 const Tabata = () => {
+  //Estados de configuración
   const [preparationTime, setPreparationTime] = useState(5);
   const [workTime, setWorkTime] = useState(20);
   const [restTime, setRestTime] = useState(15);
   const [roundsPerBlock, setRoundsPerBlock] = useState(8);
   const [totalBlocks, setTotalBlocks] = useState(4);
   const [blockRestTime, setBlockRestTime] = useState(120);
+  //
   const [currentBlock, setCurrentBlock] = useState(1);
   const [currentRound, setCurrentRound] = useState(1);
   const [currentInterval, setCurrentInterval] = useState("Preparacion");
@@ -22,22 +23,23 @@ const Tabata = () => {
   const [timeRemaining, setTimeRemaining] = useState(preparationTime);
   const [totalTimeRemaining, setTotalTimeRemaining] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const [reset, setReset] = useState(false)
 
   const inicioEjercicioAudio = new Audio(inicioEjercicioSound);
   const inicioDescansoAudio = new Audio(inicioDescansoSound);
   const inicioDescansoLargoAudio = new Audio(inicioDescansoLargoSound);
   const aplausos = new Audio(aplausosSound);
   const cuentaRegresivaAudio = new Audio(cuentaRegresivaSound);
-
+  
   useEffect(() => {
     setTimeRemaining(preparationTime);
   }, [preparationTime]);
-
+  
   useEffect(() => {
     const totalDuration =
-      preparationTime * 1000 +
-      (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
-      blockRestTime * (totalBlocks - 1) * 1000;
+    preparationTime * 1000 +
+    (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
+    blockRestTime * (totalBlocks - 1) * 1000;
     setTotalTimeRemaining(totalDuration / 1000);
 
     const now = new Date();
@@ -50,11 +52,12 @@ const Tabata = () => {
     roundsPerBlock,
     totalBlocks,
     blockRestTime,
+    reset,
   ]);
 
   const startTimer = () => {
     if (timer) return;
-
+    
     setTimer(
       setInterval(() => {
         setTimeRemaining((prevTime) => {
@@ -66,23 +69,25 @@ const Tabata = () => {
           return newTime;
         });
       }, 1000)
-    );
-  };
-
-  const pauseTimer = () => {
-    clearInterval(timer);
-    setTimer(null);
-  };
-
-  const resetTimer = () => {
-    clearInterval(timer);
-    setTimer(null);
-    setTimeRemaining(preparationTime);
-    setCurrentBlock(1);
-    setCurrentRound(1);
-    setCurrentInterval("Preparacion");
-    setTotalTimeRemaining(null);
-  };
+      );
+    };
+    
+    const pauseTimer = () => {
+      clearInterval(timer);
+      setTimer(null);
+    };
+    
+    const resetTimer = () => {
+      clearInterval(timer);
+      setTimer(null);
+      setTimeRemaining(preparationTime);
+      setCurrentBlock(1);
+      setCurrentRound(1);
+      setCurrentInterval("Preparacion");
+      setTotalTimeRemaining(null);
+      setEndTime(null);
+      setReset(!reset)
+    };
 
   useEffect(() => {
     if (timeRemaining === 0) {
@@ -146,14 +151,14 @@ const Tabata = () => {
   };
 
   const calculateTotalProgress = () => {
-    const totalDuration =
+    const totalDuration1 =
       preparationTime * 1000 +
       (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
       blockRestTime * (totalBlocks - 1) * 1000;
 
-    const elapsedTime = totalDuration - totalTimeRemaining * 1000;
+    const elapsedTime = totalDuration1 - totalTimeRemaining * 1000;
 
-    return (elapsedTime / totalDuration) * 100;
+    return (elapsedTime / totalDuration1) * 100;
   };
 
   return (
@@ -208,6 +213,7 @@ const Tabata = () => {
         <h4>Preperación</h4>
         <input
           type="number"
+          min="0"
           value={preparationTime}
           onChange={(e) => setPreparationTime(parseInt(e.target.value))}
         />
@@ -216,6 +222,7 @@ const Tabata = () => {
         <h4>Ejercicio</h4>
         <input
           type="number"
+          min="0"
           value={workTime}
           onChange={(e) => setWorkTime(parseInt(e.target.value))}
         />
@@ -224,6 +231,7 @@ const Tabata = () => {
         <h4>Descanso</h4>
         <input
           type="number"
+          min="0"
           value={restTime}
           onChange={(e) => setRestTime(parseInt(e.target.value))}
         />
@@ -232,6 +240,7 @@ const Tabata = () => {
         <h4>Estaciones</h4>
         <input
           type="number"
+          min="0"
           value={roundsPerBlock}
           onChange={(e) => setRoundsPerBlock(parseInt(e.target.value))}
         />
@@ -240,6 +249,7 @@ const Tabata = () => {
         <h4>Bloques</h4>
         <input
           type="number"
+          min="0"
           value={totalBlocks}
           onChange={(e) => setTotalBlocks(parseInt(e.target.value))}
         />
@@ -248,6 +258,7 @@ const Tabata = () => {
         <h4>Descanso entre bloques</h4>
         <input
           type="number"
+          min="0"
           value={blockRestTime}
           onChange={(e) => setBlockRestTime(parseInt(e.target.value))}
         />
