@@ -138,8 +138,6 @@ const Tabata = () => {
     timer,
   ]);
 
-  console.log(currentInterval);
-
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
