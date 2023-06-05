@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { currentExercise } from "../../Redux/actions";
 import style from "./ejercicios.module.css"
 
 const Ejercicios = ({ handleAddExercises, currentRound }) => {
+  const dispatch = useDispatch();
   const [exercises, setExercises] = useState([]);
   const [inputExercise, setInputExercise] = useState("");
 
@@ -18,6 +21,12 @@ const Ejercicios = ({ handleAddExercises, currentRound }) => {
     updatedExercises.splice(index, 1);
     setExercises(updatedExercises);
   };
+  
+  useEffect(()=>{
+  if(exercises){
+  dispatch(currentExercise(exercises[currentRound - 1]))
+  }
+  },[currentRound, exercises])
 
   return (
     <div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import inicioEjercicioSound from "./Inicio ejercicio.mp3";
 import inicioDescansoSound from "./Inicio descanso.mp3";
 import cuentaRegresivaSound from "./cuenta regresiva.mp3";
@@ -8,6 +9,7 @@ import style from "./tabata.module.css";
 import Ejercicios from "../Ejercicios/ejercicios";
 
 const Tabata = () => {
+const exercise = useSelector((state) => state.exercise[0])
   //Estados de configuración
   const [preparationTime, setPreparationTime] = useState(5);
   const [workTime, setWorkTime] = useState(20);
@@ -171,6 +173,7 @@ const Tabata = () => {
             ? "FIN"
             : `Bloque ${currentBlock}/${totalBlocks} - Ejercicio ${currentRound}/${roundsPerBlock}`}
         </h2>
+        <h1 className={style.exercise}>{exercise}</h1>
         {timeRemaining !== null && (
           <h3 className={style.timeRemaining}>{timeRemaining}</h3>
         )}

@@ -8,6 +8,14 @@
     width: 100%;
 
   }
+
+  .exercise{
+    font-size: 75px;
+    color: #dfdddd;
+    margin-bottom: 0px;
+    background-color: #427fa4;
+    border-radius: 20px;
+  }
   
   .container.ejercicio {
     background-color: #67e76d; /* Verde pastel */
@@ -36,7 +44,7 @@
   }
   
   .timeRemaining {
-    font-size: 400px;
+    font-size: 300px;
     color: #333;
     margin-top: 0px;
     margin-bottom: 0px;
