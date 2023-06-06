@@ -14,7 +14,7 @@
   margin-bottom: 10px;
 }
 
-.videoContainer {
+.iframeContainer {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -36,10 +36,40 @@ iframe{
   border-radius: 20px;
 }
 
+@media (max-width: 1919px){
+.container{
+  justify-content: start;
+}
+  iframe{
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140%;
+    height: 140%;
+    }
+  
+  
+  .iframeContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    margin-bottom: 26%;
+    height: 8px; 
+  }
+
+  .deleteButton {
+    position:absolute;
+    top: 115px;
+    left: 400px;
+  }
+
+  }
+
 @media (max-width: 768px) {
   .container {
     display: flex;
-    flex-direction: column;
     width: 100%;
     align-items: center;
   }

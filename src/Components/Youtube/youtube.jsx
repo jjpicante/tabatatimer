@@ -58,11 +58,11 @@ const Youtube = () => {
       </button>
       <div>
         {videoList.map((video, index) => (
-          <div key={index} className={style.videoContainer}>
-            <iframe
+          <div key={index} className={style.iframeContainer}>
+            <iframe 
               title="Musica para entrenar"
               width="580"
-              height="300"
+              height="298.13"
               src={video.embedCode}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -71,7 +71,7 @@ const Youtube = () => {
             <button onClick={() => handleDelete(index)} className={style.deleteButton}>
               X
             </button>
-          </div>
+            </div>
         ))}
       </div>
     </div>
