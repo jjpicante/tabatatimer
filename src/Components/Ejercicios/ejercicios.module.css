@@ -34,11 +34,7 @@ textarea{
 
 @media (max-width: 768px){
     .ejercicios{
-        position:relative;  
-        width: 100%;
-        height: 100%; 
-        border-radius: 5px;
-        
+       display: none
      }
 
 }
