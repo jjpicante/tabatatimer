@@ -3,14 +3,18 @@
         top:10px;
         left: 10px;
         text-decoration: bolder;
-        background-color: #1A5276;
+        background-color: transparent;
+        backdrop-filter: blur(3px);
+        box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.3);
+        border: black solid 4px;
         color: white;
         border-radius: 50px;
         justify-content: space-between;
         overflow:visible;
         width: 32%;
         font-size: 3.25rem;
-      }
+    }
+
 .ejercicio{
     text-transform: capitalize;
     margin-block-start: 0.23em;
@@ -34,7 +38,7 @@ textarea{
 
 @media (max-width: 768px){
     .ejercicios{
-       display: none
-     }
+    display: none
+    }
 
 }

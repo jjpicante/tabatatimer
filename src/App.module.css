@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: space-between;
+  background: linear-gradient(to right, #2c3e50, #bdc3c7);
 }
 
 .column {
