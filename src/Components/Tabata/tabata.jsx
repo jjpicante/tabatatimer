@@ -14,7 +14,7 @@ const Tabata = () => {
   const [preparationTime, setPreparationTime] = useState(5);
   const [workTime, setWorkTime] = useState(30);
   const [restTime, setRestTime] = useState(15);
-  const [roundsPerBlock, setRoundsPerBlock] = useState(8);
+  const [roundsPerBlock, setRoundsPerBlock] = useState(10);
   const [totalBlocks, setTotalBlocks] = useState(4);
   const [blockRestTime, setBlockRestTime] = useState(120);
   //
