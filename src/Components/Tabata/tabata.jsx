@@ -9,10 +9,10 @@ import style from "./tabata.module.css";
 import Ejercicios from "../Ejercicios/ejercicios";
 
 const Tabata = () => {
-const exercise = useSelector((state) => state.exercise[0])
+  const exercise = useSelector((state) => state.exercise[0]);
   //Estados de configuración
   const [preparationTime, setPreparationTime] = useState(5);
-  const [workTime, setWorkTime] = useState(20);
+  const [workTime, setWorkTime] = useState(30);
   const [restTime, setRestTime] = useState(15);
   const [roundsPerBlock, setRoundsPerBlock] = useState(8);
   const [totalBlocks, setTotalBlocks] = useState(4);
@@ -25,23 +25,23 @@ const exercise = useSelector((state) => state.exercise[0])
   const [timeRemaining, setTimeRemaining] = useState(preparationTime);
   const [totalTimeRemaining, setTotalTimeRemaining] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [reset, setReset] = useState(false)
+  const [reset, setReset] = useState(false);
 
   const inicioEjercicioAudio = new Audio(inicioEjercicioSound);
   const inicioDescansoAudio = new Audio(inicioDescansoSound);
   const inicioDescansoLargoAudio = new Audio(inicioDescansoLargoSound);
   const aplausos = new Audio(aplausosSound);
   const cuentaRegresivaAudio = new Audio(cuentaRegresivaSound);
-  
+
   useEffect(() => {
     setTimeRemaining(preparationTime);
   }, [preparationTime]);
-  
+
   useEffect(() => {
     const totalDuration =
-    preparationTime * 1000 +
-    (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
-    blockRestTime * (totalBlocks - 1) * 1000;
+      preparationTime * 1000 +
+      (workTime + restTime) * roundsPerBlock * totalBlocks * 1000 +
+      blockRestTime * (totalBlocks - 1) * 1000;
     setTotalTimeRemaining(totalDuration / 1000);
 
     const now = new Date();
@@ -59,7 +59,7 @@ const exercise = useSelector((state) => state.exercise[0])
 
   const startTimer = () => {
     if (timer) return;
-    
+
     setTimer(
       setInterval(() => {
         setTimeRemaining((prevTime) => {
@@ -71,25 +71,25 @@ const exercise = useSelector((state) => state.exercise[0])
           return newTime;
         });
       }, 1000)
-      );
-    };
-    
-    const pauseTimer = () => {
-      clearInterval(timer);
-      setTimer(null);
-    };
-    
-    const resetTimer = () => {
-      clearInterval(timer);
-      setTimer(null);
-      setTimeRemaining(preparationTime);
-      setCurrentBlock(1);
-      setCurrentRound(1);
-      setCurrentInterval("Preparacion");
-      setTotalTimeRemaining(null);
-      setEndTime(null);
-      setReset(!reset)
-    };
+    );
+  };
+
+  const pauseTimer = () => {
+    clearInterval(timer);
+    setTimer(null);
+  };
+
+  const resetTimer = () => {
+    clearInterval(timer);
+    setTimer(null);
+    setTimeRemaining(preparationTime);
+    setCurrentBlock(1);
+    setCurrentRound(1);
+    setCurrentInterval("Preparacion");
+    setTotalTimeRemaining(null);
+    setEndTime(null);
+    setReset(!reset);
+  };
 
   useEffect(() => {
     if (timeRemaining === 0) {
@@ -178,12 +178,12 @@ const exercise = useSelector((state) => state.exercise[0])
           <h3 className={style.timeRemaining}>{timeRemaining}</h3>
         )}
       </div>
-          <div className={style.progressBarContainer}>
-            <div
-              className={style.progressBarFill}
-              style={{ width: `${calculateTotalProgress()}%` }}
-            ></div>
-          </div>
+      <div className={style.progressBarContainer}>
+        <div
+          className={style.progressBarFill}
+          style={{ width: `${calculateTotalProgress()}%` }}
+        ></div>
+      </div>
       <div className={style.totalTimeContainer}>
         <h4 className={style.totalTimeTitle}>Tiempo total:</h4>
         {totalTimeRemaining !== null && (
