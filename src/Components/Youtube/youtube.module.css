@@ -1,82 +1,101 @@
-.buttonStyle {
-  background-color: #1d86d1;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+.container {
+  width: 100%;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.container h4 {
+  margin: 0 0 14px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
 }
 
 .inputStyle {
-  padding: 10px;
-  border: 1px solid #1d86d1;
-  border-radius: 10px;
+  width: 100%;
+  padding: 12px 14px;
   margin-bottom: 10px;
+  font: inherit;
+  color: var(--text);
+  background: rgba(11, 17, 32, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.inputStyle::placeholder {
+  color: var(--text-dim);
+}
+
+.inputStyle:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
+}
+
+.buttonStyle {
+  padding: 10px 20px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #06121f;
+  background: #38bdf8;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.buttonStyle:hover {
+  filter: brightness(1.08);
+}
+
+.error {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: #f87171;
 }
 
 .iframeContainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+}
+
+.iframeContainer iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .deleteButton {
-  color: rgb(33, 30, 30);
-  border: rgb(33, 30, 30) solid 2px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
-  height: 1.6rem;
-  width: 1.6rem;
-  padding: 5px;
-  margin-left: 10px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease;
 }
 
-iframe{
-  border-radius: 20px;
-}
-
-@media (max-width: 1919px){
-.container{
-  justify-content: start;
-}
-  iframe{
-    border-radius: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 140%;
-    height: 140%;
-    }
-  
-  
-  .iframeContainer {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    margin-bottom: 26%;
-    height: 8px; 
-  }
-
-  .deleteButton {
-    position:absolute;
-    top: 115px;
-    left: 400px;
-  }
-
-  }
-
-@media (max-width: 768px) {
-  .container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-  }
-
-  iframe {
-    margin-top: 10px;
-    width: 100%;
-    border-radius: 20px;
-  }
+.deleteButton:hover {
+  background: rgba(244, 63, 94, 0.85);
 }

@@ -1,66 +1,70 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { currentExercise } from "../../Redux/actions";
-import style from "./ejercicios.module.css"
+import React, { useState } from "react";
+import style from "./ejercicios.module.css";
 
-const Ejercicios = ({ handleAddExercises, currentRound }) => {
-  const dispatch = useDispatch();
-  const [exercises, setExercises] = useState([]);
+const Ejercicios = ({ exercises, setExercises, handleAddExercises, currentRound }) => {
   const [inputExercise, setInputExercise] = useState("");
 
   const addExercise = () => {
     if (inputExercise.trim() !== "") {
-      const newExercises = inputExercise.split("\n").map((exercise) => exercise.trim());
+      const newExercises = inputExercise
+        .split("\n")
+        .map((exercise) => exercise.trim())
+        .filter((exercise) => exercise !== "");
       setExercises([...exercises, ...newExercises]);
       setInputExercise("");
     }
   };
 
   const removeExercise = (index) => {
-    const updatedExercises = [...exercises];
-    updatedExercises.splice(index, 1);
-    setExercises(updatedExercises);
+    setExercises(exercises.filter((_, i) => i !== index));
   };
-  
-  useEffect(()=>{
-  if(exercises){
-  dispatch(currentExercise(exercises[currentRound - 1]))
-  }
-  },[currentRound, exercises])
 
   return (
-    <div>
-      <h4>Agregar ejercicios</h4>
+    <div className={style.wrapper}>
+      <h4 className={style.heading}>Ejercicios</h4>
       <div className={style.containertxtarea}>
         <textarea
+          className={style.textarea}
           value={inputExercise}
-          placeholder="Agregue uno o varios ejercicios (uno por línea)"
+          placeholder="Agregá uno o varios ejercicios (uno por línea)"
           onChange={(e) => setInputExercise(e.target.value)}
         />
-        <button onClick={addExercise}>Agregar</button>
+        <button className={style.addButton} onClick={addExercise}>
+          Agregar
+        </button>
       </div>
-      <div>
-        {exercises?.map((e, i) => (
-          <div key={i}>
-            <p>{i + 1}- {e}</p>
-            <button onClick={() => removeExercise(i)}>x</button>
-          </div>
-        ))}
-      </div>
-      {exercises.length ? (
-        <div className={style.ejercicios}>
-          {exercises?.map((e, i) => (
-            <div key={i}>
-              <p className={`${style.ejercicio} ${i + 1 === currentRound ? style.currentRound : ""}`}>
-                {i + 1}- {e}
-              </p>
-            </div>
+
+      {exercises.length > 0 && (
+        <ul className={style.list}>
+          {exercises.map((e, i) => (
+            <li
+              key={`${i}-${e}`}
+              className={`${style.item} ${
+                i + 1 === currentRound ? style.currentRound : ""
+              }`}
+            >
+              <span className={style.itemIndex}>{i + 1}</span>
+              <span className={style.itemName}>{e}</span>
+              <button
+                className={style.removeButton}
+                aria-label={`Quitar ${e}`}
+                onClick={() => removeExercise(i)}
+              >
+                ×
+              </button>
+            </li>
           ))}
-        </div>
-      ) : (
-        <div></div>
+        </ul>
       )}
-      <button onClick={() => handleAddExercises(exercises)}>Coordinar con el tabata</button>
+
+      {exercises.length > 0 && (
+        <button
+          className={style.syncButton}
+          onClick={() => handleAddExercises(exercises)}
+        >
+          Usar {exercises.length} ejercicios como estaciones
+        </button>
+      )}
     </div>
   );
 };

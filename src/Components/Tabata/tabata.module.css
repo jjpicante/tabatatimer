@@ -1,194 +1,256 @@
 .container {
-  display:block;
-    text-align: center;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 50px;
-    width: 100%;
-
-  }
-
-  .exercise{
-    font-size: 75px;
-    color: #dfdddd;
-    margin-bottom: 0px;
-    background-color: #427fa4;
-    border-radius: 20px;
-  }
-  
-  .container.ejercicio {
-    background-color: #67e76d; /* Verde pastel */
-  }
-  
-  .container.descanso {
-    background-color: #ee7474; /* Rojo pastel */
-  }
-  
-  .container.descansoentrebloques {
-    background-color: #e7e04d; /* Amarillo pastel */
-  }
-  .title {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .intervalContainer {
-    margin-bottom: 30px;
-  }
-  
-  .intervalTitle {
-    font-size: 48px;
-    color: #333;
-  }
-  
-  .timeRemaining {
-    font-size: 300px;
-    color: #333;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-  
-  .totalTimeContainer {
-    margin-top: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .totalTimeTitle {
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .totalTime {
-    font-size: 24px;
-    color: #555;
-  }
-  
-  .buttonsContainer {
-    margin-bottom: 30px;
-  }
-  
-  .startButton {
-    padding: 10px 40px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #1d86d1;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .pauseButton {
-    padding: 10px 40px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #1d86d1;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .resetButton {
-    padding: 10px 40px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #1d86d1;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .settingsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .settingsContainer div {
-    margin-bottom: 10px;
-  }
-  
-  .settingsContainer h4 {
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .settingsContainer input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .startButton:hover,
-.pauseButton:hover,
-.resetButton:hover {
-  background-color: #1581c2; /* Cambia el color de fondo cuando se realiza el hover */
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.16);
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 24px 20px 28px;
+  border-radius: 26px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--accent-soft), transparent 55%),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
-.startButton:active,
-.pauseButton:active,
-.resetButton:active {
-  transform: translateY(2px); /* Mueve el botón hacia abajo cuando se presiona */
+/* Acento por fase: tiñe número, barra, badge y glow del contenedor */
+.container.preparacion {
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.16);
+}
+.container.ejercicio {
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.18);
+}
+.container.descanso {
+  --accent: #f59e0b;
+  --accent-soft: rgba(245, 158, 11, 0.18);
+}
+.container.descansoentrebloques {
+  --accent: #a855f7;
+  --accent-soft: rgba(168, 85, 247, 0.18);
+}
+.container.fin {
+  --accent: #f43f5e;
+  --accent-soft: rgba(244, 63, 94, 0.18);
+}
+
+.intervalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.intervalTitle {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.exercise {
+  margin: 8px 0 0;
+  font-size: clamp(1.4rem, 6vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: capitalize;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.timeRemaining {
+  font-size: clamp(6rem, 40vw, 12rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 42px var(--accent-soft);
+}
+
+.finMark {
+  font-size: clamp(5rem, 32vw, 9rem);
+  line-height: 1;
+  margin: 8px 0;
+}
+
+.phaseTag {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
 }
 
 .progressBarContainer {
   width: 100%;
-  height: 20px;
-  border: 2px solid #333333;
-  background-color: #fff;
-  border-radius: 8px;
+  height: 12px;
+  margin: 20px 0 16px;
+  background: rgba(148, 163, 184, 0.14);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progressBarFill {
   height: 100%;
-  background-color: #007bff;
-  border-radius: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #fff));
+  box-shadow: 0 0 16px var(--accent-soft);
   transition: width 0.5s ease;
 }
 
-@media (max-width: 1919px){
-  .intervalTitle {
-    font-size: 30px;
-  }
-  .intervalContainer {
-    margin-bottom: 0px;
-  }
-
-  .timeRemaining {
-    font-size: 220px;
+.totalTimeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 22px;
 }
 
 .totalTimeTitle {
-  font-size: 14px;
-  color: #555;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
 }
 
 .totalTime {
-  font-size: 20px;
-  color: #555;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
 
-
-
+.endTime {
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--text-dim);
 }
 
-@media (max-width: 768px){
-  .timeRemaining {
-    font-size: 250px;
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.startButton,
+.pauseButton,
+.resetButton {
+  padding: 14px 8px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #06121f;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.startButton {
+  background: #22c55e;
+  box-shadow: 0 10px 24px -10px rgba(34, 197, 94, 0.8);
+}
+
+.pauseButton {
+  background: #f59e0b;
+  box-shadow: 0 10px 24px -10px rgba(245, 158, 11, 0.8);
+}
+
+.resetButton {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.startButton:hover,
+.pauseButton:hover {
+  filter: brightness(1.06);
+}
+
+.resetButton:hover {
+  color: #f43f5e;
+  border-color: rgba(244, 63, 94, 0.5);
+}
+
+.startButton:active,
+.pauseButton:active,
+.resetButton:active {
+  transform: translateY(2px);
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.settingCard {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 12px 10px;
+  background: rgba(148, 163, 184, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: left;
+}
+
+.settingLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-dim);
+  min-height: 1.9em;
+}
+
+.settingInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  background: rgba(11, 17, 32, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.settingInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.exercisesSection {
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 16px 24px;
+    border-radius: 22px;
   }
 
-  .resetButton {
-    margin-top: 10px;
-    background-color: #d1411d;
+  .settingsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  .container{
-    margin-top:0px
-  }
-
-  
-}  
+}

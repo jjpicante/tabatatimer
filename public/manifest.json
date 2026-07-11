@@ -1,25 +1,39 @@
 {
   "short_name": "Tabata Timer",
-  "name": "Tabata timer de Juan Fiorovic",
+  "name": "Tabata Timer de Juan Fiorovic",
+  "description": "Temporizador de intervalos (Tabata/HIIT) para entrenar, con lista de ejercicios y música.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.ico.png",
+      "sizes": "512x512",
+      "type": "image/png"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
+  "id": "/",
   "start_url": ".",
+  "scope": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait",
+  "theme_color": "#2c3e50",
+  "background_color": "#2c3e50",
+  "lang": "es",
+  "categories": ["health", "fitness", "sports"]
 }
